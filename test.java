@@ -62,8 +62,8 @@ public class test {
         // Detect room at the end of subjectTokens
         if (!subjectTokens.isEmpty()) {
             String lastToken = subjectTokens.get(subjectTokens.size() - 1);
-            // Room patterns: RM207, Room207, Room 207, etc.
-            if (lastToken.matches("\\d+( ?#\\w+)?") || lastToken.matches("(?i)RM\\d+|Room")) {
+            // Room patterns: RM207, Room207, Room 207, #Special, etc.
+            if (lastToken.matches("\\d+( ?#\\w+)?") || lastToken.matches("(?i)RM\\d+|Room|#.*")) {
                 room = lastToken;
                 subjectTokens.remove(subjectTokens.size() - 1);
             } else if (subjectTokens.size() >= 2 &&
@@ -117,5 +117,13 @@ public class test {
         System.out.println("Subject: " + result4[1]);
         System.out.println("Room: " + result4[2]);
         System.out.println(java.util.Arrays.toString(result4));
+
+        String lesson5 = "OLE (2:20-3:10) ##Special";
+        String[] result5 = splitter.splitLesson(lesson5);
+        System.out.println("Lesson: " + lesson5);
+        System.out.println("Code: " + result5[0]);
+        System.out.println("Subject: " + result5[1]);
+        System.out.println("Room: " + result5[2]);
+        System.out.println(java.util.Arrays.toString(result5));
     }
 }
